@@ -1,0 +1,29 @@
+@(form: Form[models.DarnInfo])
+
+<form action="/darnform" method="GET">
+
+    @helper.inputText( form("lat") )
+
+    @helper.inputText( form("lng") )
+
+    @helper.inputText( form("name") )
+
+    <button type="submit">แจ้งด่าน</button>
+
+</form>
+
+<div>
+    <table>
+        <tr><td>id</td><td>lat</td><td>lng</td><td>name</td></tr>
+       @DarnInfo.find.all().map { darn =>
+        <tr>
+            <td>@darn.id</td>
+            <td>@darn.lat</td>
+            <td>@darn.lng</td>
+            <td>@darn.name</td>
+            <td><a href="/delete/darn/@darn.id">delete</a></td>
+        </tr>
+        }
+
+    </table>
+</div>
